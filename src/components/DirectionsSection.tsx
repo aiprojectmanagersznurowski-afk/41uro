@@ -33,8 +33,8 @@ export function DirectionsSection() {
           <ArrowIcon dark />
         </a>
 
-        <p className="px-1 text-[12px] leading-relaxed text-muted">
-          Zalecamy parking podziemny przy Placu Nowy Targ — kilka minut spacerem od restauracji.
+        <p className="px-1 text-[14.5px] leading-relaxed text-muted">
+          Zalecam parking podziemny przy Placu Nowy Targ — tuż obok restauracji.
         </p>
       </div>
     </section>
