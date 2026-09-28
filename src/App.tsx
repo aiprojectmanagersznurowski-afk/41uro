@@ -17,8 +17,8 @@ function App() {
       <DetailsSection />
       <DirectionsSection />
       <KidsSection />
-      <PhotoTiles />
       <RsvpSection />
+      <PhotoTiles />
       <Footer />
     </main>
   )

@@ -1,34 +1,32 @@
+import { DitherHelixCarousel } from "./ui/dither-helix-carousel"
 import familyPhoto from "../assets/family.jpg"
 import mountainPhoto from "../assets/tile-mountain.jpg"
 import cafePhoto from "../assets/moment-cafe.jpg"
 import breakfastPhoto from "../assets/tile-breakfast.jpg"
 import readingPhoto from "../assets/tile-reading.jpg"
-import { useScrollReveal } from "../lib/useScrollReveal"
 
-const tiles = [
-  { src: familyPhoto, alt: "Michał z rodziną w ogrodzie", wide: false },
-  { src: mountainPhoto, alt: "Michał ze znajomymi na szczycie górskim", wide: false },
-  { src: cafePhoto, alt: "Michał ze znajomymi przy stoliku w ogrodzie", wide: false },
-  { src: breakfastPhoto, alt: "Michał przy wspólnym śniadaniu", wide: false },
-  { src: readingPhoto, alt: "Wspólne czytanie z najmłodszymi", wide: true },
+const items = [
+  { image: familyPhoto, title: "Rodzina" },
+  { image: mountainPhoto, title: "Szczyt" },
+  { image: cafePhoto, title: "Wspólny stół" },
+  { image: breakfastPhoto, title: "Śniadanie" },
+  { image: readingPhoto, title: "Wspólne czytanie" },
 ]
 
-/** Kafelki obok siebie, bez podpisów — samo zdjęcie ma mówić. */
+/**
+ * Galeria zdjęć — spiralna karuzela z ziarnem (WebGL2, `ui/dither-helix-carousel`).
+ * Przeciągnij pionowo albo przewiń kółkiem, żeby obrócić kolumnę; dotknij
+ * zdjęcia, żeby przenieść je na wprost. Bez wsparcia WebGL2 komponent sam
+ * spada do zwykłej, przewijanej listy (patrz jego kod).
+ */
 export function PhotoTiles() {
-  const ref = useScrollReveal<HTMLDivElement>({ y: 40, scale: 0.97, blur: 6 })
-
   return (
-    <section className="px-3 py-10">
-      <div ref={ref} className="grid grid-cols-2 gap-2">
-        {tiles.map((t) => (
-          <div
-            key={t.src}
-            className={`overflow-hidden rounded-[18px] ${t.wide ? "col-span-2 aspect-[16/10]" : "aspect-square"}`}
-          >
-            <img src={t.src} alt={t.alt} loading="lazy" className="h-full w-full object-cover" />
-          </div>
-        ))}
-      </div>
+    <section className="px-0 py-3">
+      <DitherHelixCarousel
+        items={items}
+        accent="#b8552f"
+        className="h-[78svh] w-full"
+      />
     </section>
   )
 }

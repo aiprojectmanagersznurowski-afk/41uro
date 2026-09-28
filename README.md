@@ -75,10 +75,17 @@ Kolejność sekcji w `App.tsx`:
 3. **`DetailsSection`** („Kiedy i gdzie") — cała karta wjeżdża tym samym efektem co zdjęcie wyżej.
 4. **`DirectionsSection`** („Dojazd") — bez dodatkowego efektu, zwykłe przewinięcie.
 5. **`KidsSection`** — informacja o kąciku dla dzieci.
-6. **`PhotoTiles`** — cztery zdjęcia w siatce 2×2, bez podpisów, z delikatnym wjazdem.
-7. **`RsvpSection`** + **`Footer`** — na końcu.
+6. **`RsvpSection`** („Będziesz z nami?") — przed galerią.
+7. **`PhotoTiles`** — galeria zdjęć jako spiralna karuzela z ziarnem (`ui/dither-helix-carousel.tsx`, WebGL2) — patrz niżej.
+8. **`Footer`** — na końcu.
 
 Efekt „wjeżdżania" (`src/lib/useScrollReveal.ts`) jest kinowy — GSAP + ScrollTrigger ze `scrub`, więc animacja (blur → ostrość, skala, przesunięcie, przezroczystość) jest CIĄGLE powiązana z pozycją scrolla, nie jednorazowo odpalana przy wejściu w viewport. Cofnięcie scrolla cofa też animację, dokładnie jak w referencyjnym `cinematic-landing-hero`. Hero (`IntroPoster`) ma odwrotny wariant tego samego mechanizmu — treść gaśnie (blur/skala/przesunięcie w górę) w miarę przewijania w dół, bez pinowania sekcji.
+
+## Galeria zdjęć (`ui/dither-helix-carousel.tsx`)
+
+Zdjęcia (`family.jpg`, `tile-mountain.jpg`, `moment-cafe.jpg`, `tile-breakfast.jpg`, `tile-reading.jpg`) wiszą na spiralnej kolumnie w 3D (czysty WebGL2, bez bibliotek) — kart w centrum jest ostra, te dalej w spirali rozmywają się i rozpadają na ziarno przypominające druk, zależnie od odległości i pozycji. Przeciągnięcie w pionie albo kółko myszy obraca kolumnę; dotknięcie zdjęcia przenosi je na wprost. Kolor akcentu ziarna to nasza terakota (`#b8552f`, przekazane jako `accent` — musi być realnym kolorem, nie `var(--...)`, bo komponent odczytuje go przez `canvas.fillStyle`).
+
+Jeśli przeglądarka nie wspiera WebGL2, komponent sam przełącza się na zwykłą, przewijaną listę zdjęć (ten sam kod, `!supported`) — nic nie trzeba obsługiwać ręcznie. Żeby podmienić zestaw zdjęć albo ich tytuły, edytuj tablicę `items` w `src/components/PhotoTiles.tsx`.
 
 ## Zdjęcie podglądu linku (Open Graph)
 

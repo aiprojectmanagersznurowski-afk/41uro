@@ -14,6 +14,11 @@
   --color-khaki: #d8ccac;
   --color-khaki-deep: #b7a87c;
   --color-line: #211d1a24;
+
+  /* Aliasy pod komponenty pisane w konwencji shadcn (bg-background itp.) */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-ink);
+  --color-muted-foreground: var(--color-muted);
 }
 
 html {
