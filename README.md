@@ -18,10 +18,14 @@ npm run preview # podgląd builda lokalnie
 
 ## Wdrożenie na Netlify
 
-1. Wypchnij repo na GitHub (lub użyj `netlify deploy` z CLI).
-2. W Netlify: **Add new site → Import from Git**, wybierz repo.
-3. Ustawienia builda są już w `netlify.toml` (`npm run build`, katalog `dist`) — Netlify wykryje je automatycznie.
-4. Po wdrożeniu strona ma nagłówek `noindex`, więc nie trafi do wyszukiwarek — link działa tylko dla osób, które go dostaną.
+Repo: https://github.com/aiprojectmanagersznurowski-afk/41uro
+
+1. Zaloguj się na [app.netlify.com](https://app.netlify.com) → **Add new site → Import an existing project → Deploy with GitHub**.
+2. Wybierz repo `aiprojectmanagersznurowski-afk/41uro`.
+3. Ustawienia builda są już w `netlify.toml` (`npm run build`, katalog `dist`) — Netlify wykryje je automatycznie, nic nie trzeba zmieniać.
+4. Kliknij **Deploy** — po chwili dostaniesz link `*.netlify.app`. Możesz go zmienić na czytelniejszy w **Site settings → Change site name**.
+5. Strona ma nagłówek `noindex`, więc nie trafi do wyszukiwarek — link działa tylko dla osób, które go dostaną.
+6. Każdy kolejny `git push` na `main` automatycznie przebuduje i wdroży stronę.
 
 ## Dane wydarzenia
 
