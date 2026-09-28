@@ -62,9 +62,19 @@ Czas wydarzenia w `site.ts` jest zapisany w UTC (`startUTC`/`endUTC`) — w poł
 
 ## Muzyka
 
-Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.tsx`). Plik: `public/audio/the-commodores-easy.mp3`.
+Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.tsx`). Plik: `public/audio/the-commodores-easy.mp3`. Odtwarzanie zaczyna się od 7. sekundy (stała `START_OFFSET`) — utwór ma dłuższe, ciche intro, więc gramy od momentu, gdzie faktycznie "wchodzi" — i wraca do tego miejsca przy każdym zapętleniu, nie do 0:00.
 
 Przeglądarki blokują autoplay dźwięku, dopóki użytkownik nie wejdzie w interakcję ze stroną — logika próbuje puścić muzykę od razu, a jeśli to zablokowane, startuje przy pierwszym dotknięciu/scrollu/kliknięciu. Jedyny widoczny element to mały przycisk wyciszenia w prawym dolnym rogu (bez niego gość nie miałby jak zatrzymać dźwięku). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
+
+## Efekt scrollowania w hero (`IntroPoster.tsx`)
+
+Ekran powitalny używa GSAP + ScrollTrigger: podczas przewijania tekst rozmywa się i znika, a zdjęcie portretowe rośnie ze swojego małego, blendowanego kształtu do pełnego ekranu, gdzie na końcu pojawia się podpis "Urodziny Michała" + data. Sekcja jest przez ten czas "podpięta" (pin) — to ten sam mechanizm co w referencyjnym `cinematic-landing-hero`, tylko w naszej palecie (terakota/biel) zamiast granatu, i bez telefonu-makiety.
+
+Zdjęcie renderuje się jako **rodzeństwo**, nie dziecko animowanej warstwy tekstu — to celowe: `transform`/`filter` na przodku sprawiłby, że `position: fixed` przestałoby liczyć się względem viewportu (CSS containing-block gotcha), więc zdjęcie nie urosłoby na cały ekran. Przy `prefers-reduced-motion` cały ten mechanizm jest pomijany — zdjęcie zostaje w małym, statycznym kształcie.
+
+## Zdjęcia w tle przy scrollowaniu (`MomentsSection.tsx`)
+
+Dwa dodatkowe kadry (`src/assets/moment-street.jpg`, `moment-cafe.jpg`) wybrane z `/photo` jako najlepiej pasujące do ciepłej palety — odsłaniają się przy wejściu w viewport (IntersectionObserver + lekki ken-burns), bez ciągłego parallaxu, żeby nie obciążać telefonów. Podmień pliki i podpisy w komponencie, jeśli chcesz użyć innych zdjęć z folderu.
 
 ## Zdjęcie podglądu linku (Open Graph)
 

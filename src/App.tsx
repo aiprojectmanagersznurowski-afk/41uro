@@ -1,5 +1,6 @@
 import { IntroPoster } from "./components/IntroPoster"
 import { PhotoReveal } from "./components/PhotoReveal"
+import { MomentsSection } from "./components/MomentsSection"
 import { DetailsSection } from "./components/DetailsSection"
 import { DirectionsSection } from "./components/DirectionsSection"
 import { KidsSection } from "./components/KidsSection"
@@ -13,6 +14,7 @@ function App() {
       <BackgroundAudio />
       <IntroPoster />
       <PhotoReveal />
+      <MomentsSection />
       <DetailsSection />
       <DirectionsSection />
       <KidsSection />

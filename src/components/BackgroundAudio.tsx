@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { music } from "../config/site"
 
+// Utwór ma długie, ciche intro — gramy od tego miejsca, nie od 0:00.
+const START_OFFSET = 7
+
 /**
  * Muzyka w tle, bez widocznego playera. Przeglądarki blokują autoplay
  * dźwięku dopóki użytkownik nie wejdzie w interakcję ze stroną — próbujemy
@@ -8,6 +11,10 @@ import { music } from "../config/site"
  * pierwszego dotknięcia/kliknięcia/scrolla uruchamia utwór. Jedyny widoczny
  * ślad to mały, opcjonalny przycik wyciszenia w rogu — bez tego gość nie
  * miałby jak zatrzymać dźwięku.
+ *
+ * Pętla jest ręczna (bez atrybutu `loop`), żeby po każdym powtórzeniu wracać
+ * do START_OFFSET zamiast do 0:00 — inaczej gość usłyszałby pominięte intro
+ * ponownie przy każdym zapętleniu.
  */
 export function BackgroundAudio() {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -20,7 +27,14 @@ export function BackgroundAudio() {
 
     audio.volume = 0.55
 
+    const seekToStart = () => {
+      if (audio.currentTime < START_OFFSET || audio.ended) {
+        audio.currentTime = START_OFFSET
+      }
+    }
+
     const tryPlay = () => {
+      seekToStart()
       audio
         .play()
         .then(() => setStarted(true))
@@ -28,6 +42,14 @@ export function BackgroundAudio() {
           // Autoplay zablokowany — poczekamy na pierwszą interakcję.
         })
     }
+
+    const onLoadedMeta = () => seekToStart()
+    const onEnded = () => {
+      audio.currentTime = START_OFFSET
+      audio.play().catch(() => {})
+    }
+    audio.addEventListener("loadedmetadata", onLoadedMeta)
+    audio.addEventListener("ended", onEnded)
 
     tryPlay()
 
@@ -40,6 +62,8 @@ export function BackgroundAudio() {
     events.forEach((ev) => window.addEventListener(ev, onFirstInteraction, { once: true, passive: true }))
 
     return () => {
+      audio.removeEventListener("loadedmetadata", onLoadedMeta)
+      audio.removeEventListener("ended", onEnded)
       events.forEach((ev) => window.removeEventListener(ev, onFirstInteraction))
     }
   }, [])
@@ -48,6 +72,7 @@ export function BackgroundAudio() {
     const audio = audioRef.current
     if (!audio) return
     if (audio.paused) {
+      if (audio.currentTime < START_OFFSET || audio.ended) audio.currentTime = START_OFFSET
       audio.play().then(() => setStarted(true)).catch(() => {})
       audio.muted = false
       setMuted(false)
@@ -59,7 +84,7 @@ export function BackgroundAudio() {
 
   return (
     <>
-      <audio ref={audioRef} src={music.src} loop preload="auto" />
+      <audio ref={audioRef} src={music.src} preload="auto" />
       <button
         type="button"
         onClick={toggleMute}
