@@ -2,6 +2,8 @@ import familyPhoto from "../assets/family.jpg"
 import mountainPhoto from "../assets/tile-mountain.jpg"
 import cafePhoto from "../assets/moment-cafe.jpg"
 import breakfastPhoto from "../assets/tile-breakfast.jpg"
+import hikePhoto from "../assets/tile-hike.jpg"
+import parkPhoto from "../assets/tile-park.jpg"
 import readingPhoto from "../assets/tile-reading.jpg"
 import { useScrollReveal } from "../lib/useScrollReveal"
 
@@ -10,6 +12,8 @@ const tiles = [
   { src: mountainPhoto, alt: "Michał ze znajomymi na szczycie górskim", wide: false },
   { src: cafePhoto, alt: "Michał ze znajomymi przy stoliku w ogrodzie", wide: false },
   { src: breakfastPhoto, alt: "Michał przy wspólnym śniadaniu", wide: false },
+  { src: hikePhoto, alt: "Michał na wycieczce w górach", wide: false },
+  { src: parkPhoto, alt: "Michał ze znajomym w parku", wide: false },
   { src: readingPhoto, alt: "Wspólne czytanie z najmłodszymi", wide: true },
 ]
 

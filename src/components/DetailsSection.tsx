@@ -20,8 +20,16 @@ export function DetailsSection() {
         <div className="h-px bg-line" />
         <Row
           icon={<path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />}
-          title={venue.name}
-          subtitle="Rodzinny obiad, 10 dorosłych + 2 dzieci"
+          title={
+            <a
+              href={venue.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-line underline-offset-2"
+            >
+              {venue.name}
+            </a>
+          }
         />
         <div className="h-px bg-line" />
         <Row
@@ -63,7 +71,15 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   )
 }
 
-function Row({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) {
+function Row({
+  icon,
+  title,
+  subtitle,
+}: {
+  icon: React.ReactNode
+  title: React.ReactNode
+  subtitle?: string
+}) {
   return (
     <div className="flex items-center gap-3">
       <div className="flex h-9 w-9 flex-none items-center justify-center rounded-[10px] bg-khaki/40">
@@ -73,7 +89,7 @@ function Row({ icon, title, subtitle }: { icon: React.ReactNode; title: string; 
       </div>
       <div className="flex flex-col leading-tight">
         <span className="text-[14px] font-bold text-ink">{title}</span>
-        <span className="text-[12px] text-muted">{subtitle}</span>
+        {subtitle && <span className="text-[12px] text-muted">{subtitle}</span>}
       </div>
     </div>
   )

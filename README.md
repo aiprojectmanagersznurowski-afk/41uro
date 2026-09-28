@@ -81,6 +81,8 @@ Kolejność sekcji w `App.tsx`:
 
 Efekt „wjeżdżania" (`src/lib/useScrollReveal.ts`) jest kinowy — GSAP + ScrollTrigger ze `scrub`, więc animacja (blur → ostrość, skala, przesunięcie, przezroczystość) jest CIĄGLE powiązana z pozycją scrolla, nie jednorazowo odpalana przy wejściu w viewport. Cofnięcie scrolla cofa też animację, dokładnie jak w referencyjnym `cinematic-landing-hero`. Hero (`IntroPoster`) ma odwrotny wariant tego samego mechanizmu — treść gaśnie (blur/skala/przesunięcie w górę) w miarę przewijania w dół, bez pinowania sekcji.
 
-## Zdjęcie podglądu linku (Open Graph)
+## Zdjęcie podglądu linku (Open Graph) i favicon
 
-`public/og-image.jpg` — obrazek, który pokaże się przy wklejeniu linku np. na WhatsAppie. Można podmienić na inny kadr.
+`public/og-image.jpg` (1200×1200, portret Michała) — obrazek, który pokaże się przy wklejeniu linku np. na WhatsAppie, iMessage czy Messengerze (meta tagi `og:image`/`twitter:image` w `index.html`). Ten sam kadr służy też jako ikona strony: `public/favicon-32.png`, `public/favicon.png` (512×512) i `public/apple-touch-icon.png` (dodanie do ekranu głównego na telefonie). Żeby podmienić zdjęcie, wygeneruj nowe pliki w tych samych rozmiarach i podmień w `public/`.
+
+**Ważne po pierwszym wdrożeniu na Netlify:** `og:image`/`twitter:image` w `index.html` wskazują na ścieżkę względną (`/og-image.jpg`). Większość komunikatorów sobie z tym poradzi, ale dla pewności (szczególnie iMessage/WhatsApp bywają wybredne) warto po wdrożeniu podmienić to na pełny adres, np. `https://twoja-nazwa.netlify.app/og-image.jpg`.
