@@ -62,7 +62,7 @@ Czas wydarzenia w `site.ts` jest zapisany w UTC (`startUTC`/`endUTC`) — w poł
 
 ## Muzyka
 
-Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.tsx`). Plik: `public/audio/the-commodores-easy.mp3`. Odtwarzanie zaczyna się od 7. sekundy (stała `START_OFFSET`) — utwór ma dłuższe, ciche intro, więc gramy od momentu, gdzie faktycznie "wchodzi" — i wraca do tego miejsca przy każdym zapętleniu, nie do 0:00.
+Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.tsx`). Plik: `public/audio/the-commodores-easy.mp3`, już przycięty do właściwego fragmentu — gramy od 0:00, bez żadnego przesunięcia, w pętli (`loop`).
 
 Przeglądarki blokują autoplay dźwięku, dopóki użytkownik nie wejdzie w interakcję ze stroną — logika próbuje puścić muzykę od razu, a jeśli to zablokowane, startuje przy pierwszym dotknięciu/scrollu/kliknięciu. Jedyny widoczny element to mały przycisk wyciszenia w prawym dolnym rogu (bez niego gość nie miałby jak zatrzymać dźwięku). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
 
