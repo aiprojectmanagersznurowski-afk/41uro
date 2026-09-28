@@ -46,4 +46,4 @@ export const music = {
 // Webhook Google Apps Script podpięty pod arkusz z odpowiedziami RSVP.
 // Zobacz README.md → sekcja "RSVP" po instrukcję wdrożenia.
 export const rsvpEndpoint =
-  "https://script.google.com/macros/s/AKfycbxPLACEHOLDER/exec"
+  "https://script.google.com/macros/s/AKfycbxnvLAEVOlFZyTkABDCOPmsqp_0TQuoPq8Aw6WhZ3MHlDDkCz3f4oJ004zdkTv61z6TKA/exec"
