@@ -1,9 +1,9 @@
 import { IntroPoster } from "./components/IntroPoster"
-import { PhotoReveal } from "./components/PhotoReveal"
-import { MomentsSection } from "./components/MomentsSection"
+import { StreetReveal } from "./components/StreetReveal"
 import { DetailsSection } from "./components/DetailsSection"
 import { DirectionsSection } from "./components/DirectionsSection"
 import { KidsSection } from "./components/KidsSection"
+import { PhotoTiles } from "./components/PhotoTiles"
 import { RsvpSection } from "./components/RsvpSection"
 import { Footer } from "./components/Footer"
 import { BackgroundAudio } from "./components/BackgroundAudio"
@@ -13,11 +13,11 @@ function App() {
     <main className="mx-auto min-h-svh max-w-lg bg-bg">
       <BackgroundAudio />
       <IntroPoster />
-      <PhotoReveal />
-      <MomentsSection />
+      <StreetReveal />
       <DetailsSection />
       <DirectionsSection />
       <KidsSection />
+      <PhotoTiles />
       <RsvpSection />
       <Footer />
     </main>

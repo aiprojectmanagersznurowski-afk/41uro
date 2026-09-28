@@ -66,15 +66,19 @@ Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.
 
 Przeglądarki blokują autoplay dźwięku, dopóki użytkownik nie wejdzie w interakcję ze stroną — logika próbuje puścić muzykę od razu, a jeśli to zablokowane, startuje przy pierwszym dotknięciu/scrollu/kliknięciu. Jedyny widoczny element to mały przycisk wyciszenia w prawym dolnym rogu (bez niego gość nie miałby jak zatrzymać dźwięku). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
 
-## Efekt scrollowania w hero (`IntroPoster.tsx`)
+## Struktura strony i efekty scrollowania
 
-Ekran powitalny używa GSAP + ScrollTrigger: podczas przewijania tekst rozmywa się i znika, a zdjęcie portretowe rośnie ze swojego małego, blendowanego kształtu do pełnego ekranu, gdzie na końcu pojawia się podpis "Urodziny Michała" + data. Sekcja jest przez ten czas "podpięta" (pin) — to ten sam mechanizm co w referencyjnym `cinematic-landing-hero`, tylko w naszej palecie (terakota/biel) zamiast granatu, i bez telefonu-makiety.
+Kolejność sekcji w `App.tsx`:
 
-Zdjęcie renderuje się jako **rodzeństwo**, nie dziecko animowanej warstwy tekstu — to celowe: `transform`/`filter` na przodku sprawiłby, że `position: fixed` przestałoby liczyć się względem viewportu (CSS containing-block gotcha), więc zdjęcie nie urosłoby na cały ekran. Przy `prefers-reduced-motion` cały ten mechanizm jest pomijany — zdjęcie zostaje w małym, statycznym kształcie.
+1. **`IntroPoster`** — hero. Zdjęcie portretowe jest celowo skromne: małe, z miękką maską rozpływającą się w tło, umieszczone NAD tytułem. Najważniejszy jest napis „Urodziny Michała", zdjęcie tylko pokazuje, kto zaprasza.
+2. **`StreetReveal`** — pełnowymiarowe zdjęcie (ulica), bez podpisu, które „wjeżdża" na ekran od dołu przy scrollowaniu (IntersectionObserver + translateY/opacity, `src/lib/useReveal.ts`).
+3. **`DetailsSection`** („Kiedy i gdzie") — cała karta wjeżdża tym samym efektem co zdjęcie wyżej.
+4. **`DirectionsSection`** („Dojazd") — bez dodatkowego efektu, zwykłe przewinięcie.
+5. **`KidsSection`** — informacja o kąciku dla dzieci.
+6. **`PhotoTiles`** — cztery zdjęcia w siatce 2×2, bez podpisów, z delikatnym wjazdem.
+7. **`RsvpSection`** + **`Footer`** — na końcu.
 
-## Zdjęcia w tle przy scrollowaniu (`MomentsSection.tsx`)
-
-Dwa dodatkowe kadry (`src/assets/moment-street.jpg`, `moment-cafe.jpg`) wybrane z `/photo` jako najlepiej pasujące do ciepłej palety — odsłaniają się przy wejściu w viewport (IntersectionObserver + lekki ken-burns), bez ciągłego parallaxu, żeby nie obciążać telefonów. Podmień pliki i podpisy w komponencie, jeśli chcesz użyć innych zdjęć z folderu.
+Efekt „wjeżdżania" (`useReveal`) jest współdzielony przez kilka komponentów: element startuje przesunięty w dół i przezroczysty, a gdy wejdzie w viewport (raz, przez `IntersectionObserver`), płynnie ląduje na miejscu. Lekkie i tanie na telefonie — bez ciągłego parallaxu powiązanego ze scrollem.
 
 ## Zdjęcie podglądu linku (Open Graph)
 

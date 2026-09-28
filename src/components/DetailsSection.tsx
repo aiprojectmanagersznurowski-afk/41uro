@@ -1,9 +1,19 @@
 import { afterLunch, event, venue } from "../config/site"
 import { googleCalendarUrl, openAppleCalendar } from "../lib/calendar"
+import { useReveal } from "../lib/useReveal"
 
 export function DetailsSection() {
+  const { ref, visible } = useReveal<HTMLElement>(0.2)
+
   return (
-    <section className="flex flex-col items-center gap-6 px-6 py-14">
+    <section
+      ref={ref}
+      className="flex flex-col items-center gap-6 px-6 py-14 transition-[transform,opacity] duration-[800ms] ease-out"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(56px)",
+      }}
+    >
       <SectionLabel>Kiedy i gdzie</SectionLabel>
 
       <div className="flex w-full max-w-md flex-col gap-3 rounded-[24px] border border-line bg-paper p-6">

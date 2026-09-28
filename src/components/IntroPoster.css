@@ -58,25 +58,6 @@
   mask-image: radial-gradient(ellipse 66% 72% at 50% 42%, black 38%, transparent 100%);
 }
 
-.intro-grow-photo {
-  overflow: hidden;
-  opacity: 0;
-  transform: scale(0.92);
-  filter: blur(4px);
-  animation: portrait-in 1s 0.05s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
-  will-change: top, left, width, height, border-radius;
-}
-
-.intro-grow-scrim {
-  height: 46%;
-  background: linear-gradient(to top, rgba(18, 12, 8, 0.62), rgba(18, 12, 8, 0));
-  pointer-events: none;
-}
-
-.intro-grow-caption {
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
-}
-
 .intro-scroll-cue {
   opacity: 0;
   animation: rise 0.6s 3.3s forwards, bob 1.8s 4.1s ease-in-out infinite;
