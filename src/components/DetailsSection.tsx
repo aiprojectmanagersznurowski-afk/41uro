@@ -1,4 +1,4 @@
-import { event, venue } from "../config/site"
+import { afterLunch, event, venue } from "../config/site"
 import { googleCalendarUrl, openAppleCalendar } from "../lib/calendar"
 
 export function DetailsSection() {
@@ -19,6 +19,12 @@ export function DetailsSection() {
           icon={<path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />}
           title={venue.name}
           subtitle="Rodzinny obiad, 10 dorosłych + 2 dzieci"
+        />
+        <div className="h-px bg-line" />
+        <Row
+          icon={<path d="M13 4a2 2 0 1 1-2 2 2 2 0 0 1 2-2ZM7 21l2.2-6.6L7 13l1-4 4 1 2 3h3M9.5 21l2-5" />}
+          title="Po obiedzie: spacer"
+          subtitle={afterLunch.text}
         />
 
         <div className="mt-2 grid grid-cols-2 gap-3">

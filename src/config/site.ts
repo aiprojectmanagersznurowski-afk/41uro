@@ -31,6 +31,10 @@ export const parking = {
   lng: 17.0383874,
 }
 
+export const afterLunch = {
+  text: "Po obiedzie wybierzemy się na spacer po zabytkowym Ostrowie Tumskim — kilka kroków od restauracji.",
+}
+
 export const kids = {
   text: "Restauracja ma kącik zabaw dla dzieci, więc najmłodsi goście na pewno się nie nudzą.",
   link: "https://orzo.pl/pages/rodziny",
