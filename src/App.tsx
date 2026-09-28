@@ -3,19 +3,19 @@ import { PhotoReveal } from "./components/PhotoReveal"
 import { DetailsSection } from "./components/DetailsSection"
 import { DirectionsSection } from "./components/DirectionsSection"
 import { KidsSection } from "./components/KidsSection"
-import { MusicSection } from "./components/MusicSection"
 import { RsvpSection } from "./components/RsvpSection"
 import { Footer } from "./components/Footer"
+import { BackgroundAudio } from "./components/BackgroundAudio"
 
 function App() {
   return (
     <main className="mx-auto min-h-svh max-w-lg bg-bg">
+      <BackgroundAudio />
       <IntroPoster />
       <PhotoReveal />
       <DetailsSection />
       <DirectionsSection />
       <KidsSection />
-      <MusicSection />
       <RsvpSection />
       <Footer />
     </main>

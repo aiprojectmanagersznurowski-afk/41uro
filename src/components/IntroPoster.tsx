@@ -1,11 +1,12 @@
 import { event, venue } from "../config/site"
+import portrait from "../assets/portrait.jpg"
 import "./IntroPoster.css"
 
 /**
- * Ekran powitalny. Animowane wejście liter/cyfr + narysowana, machająca
- * postać. Statyczny stan końcowy jest w pełni czytelny (bez ruchu), więc
- * strona ma sens także przy prefers-reduced-motion lub jeśli JS/CSS
- * animacje zostaną wyłączone.
+ * Ekran powitalny. Animowane wejście liter/cyfr + zdjęcie, którego brzegi
+ * rozpływają się w tło strony (maska + rozmyta poświata w kolorze akcentu,
+ * pobranym z tła samego zdjęcia). Statyczny stan końcowy jest w pełni
+ * czytelny bez ruchu, więc strona ma sens także przy prefers-reduced-motion.
  */
 export function IntroPoster() {
   return (
@@ -15,7 +16,9 @@ export function IntroPoster() {
         <span className="text-muted">{venue.shortName}</span>
       </div>
 
-      <div className="relative mt-2 flex flex-1 flex-col items-center justify-center gap-1 pb-28 text-center">
+      <div className="relative mt-2 flex flex-1 flex-col items-center justify-center gap-1 text-center">
+        <IntroPortrait />
+
         <div className="intro-word-top font-display text-[15px] font-bold uppercase tracking-[0.28em] text-muted">
           Zapraszam na
         </div>
@@ -51,8 +54,6 @@ export function IntroPoster() {
         <div className="intro-sub mt-3 max-w-[240px] text-[13.5px] leading-relaxed text-muted">
           {event.dateLabel}, {event.weekdayLabel}, godz. <b className="text-ink">{event.timeLabel}</b>
         </div>
-
-        <WavingCharacter />
       </div>
 
       <div className="intro-scroll-cue flex flex-col items-center gap-2 text-muted">
@@ -65,44 +66,11 @@ export function IntroPoster() {
   )
 }
 
-function WavingCharacter() {
+function IntroPortrait() {
   return (
-    <div className="intro-char-wrap pointer-events-none absolute bottom-2 right-0 h-[150px] w-[118px] sm:right-4">
-      <svg viewBox="0 0 120 150" width="100%" height="100%">
-        <path
-          d="M34 150 L34 96 C34 78 46 68 60 68 C74 68 86 78 86 96 L86 150 Z"
-          fill="var(--color-ink)"
-        />
-        <g fill="var(--color-bg)" opacity=".5">
-          <circle cx="46" cy="100" r="1.4" />
-          <circle cx="58" cy="112" r="1.6" />
-          <circle cx="70" cy="98" r="1.3" />
-          <circle cx="52" cy="126" r="1.5" />
-          <circle cx="66" cy="130" r="1.3" />
-          <circle cx="44" cy="118" r="1.2" />
-        </g>
-        <path d="M40 82 C30 92 26 104 28 116" stroke="var(--color-ink)" strokeWidth="12" strokeLinecap="round" fill="none" />
-        <g className="intro-char-arm">
-          <path d="M80 84 C92 78 100 66 100 52" stroke="var(--color-ink)" strokeWidth="12" strokeLinecap="round" fill="none" />
-          <circle cx="101" cy="48" r="8" fill="var(--color-ink)" />
-        </g>
-        <rect x="54" y="58" width="12" height="14" fill="var(--color-ink)" />
-        <circle cx="60" cy="42" r="26" fill="#eac7a1" />
-        <path
-          d="M32 34 C32 18 46 8 60 8 C74 8 88 18 88 34 C88 36 87 37 85 37 L35 37 C33 37 32 36 32 34Z"
-          fill="var(--color-khaki-deep)"
-        />
-        <path d="M58 33 C40 33 30 36 22 40 C20 41 20 44 23 44 L60 40 Z" fill="var(--color-khaki-deep)" />
-        <rect x="38" y="40" width="17" height="13" rx="4" fill="none" stroke="var(--color-ink)" strokeWidth="3" />
-        <rect x="59" y="40" width="17" height="13" rx="4" fill="none" stroke="var(--color-ink)" strokeWidth="3" />
-        <path d="M55 45 H59" stroke="var(--color-ink)" strokeWidth="3" />
-        <path d="M46 62 C50 66 70 66 74 62" stroke="var(--color-ink)" strokeWidth="3" strokeLinecap="round" fill="none" />
-        <path d="M45 58 C50 62 70 62 75 58" stroke="var(--color-ink)" strokeWidth="4" strokeLinecap="round" fill="none" />
-      </svg>
-
-      <div className="intro-bubble absolute -top-1 right-1 rounded-xl rounded-br-[2px] border-[1.5px] border-ink bg-paper px-2 py-1 text-[10px] font-bold">
-        Cześć! 👋
-      </div>
+    <div className="intro-portrait-wrap relative mb-2 flex h-[220px] w-[190px] items-center justify-center">
+      <div className="intro-portrait-glow absolute inset-0" aria-hidden="true" />
+      <img src={portrait} alt="Michał" className="intro-portrait-img relative h-full w-full object-cover" />
     </div>
   )
 }

@@ -62,7 +62,9 @@ Czas wydarzenia w `site.ts` jest zapisany w UTC (`startUTC`/`endUTC`) — w poł
 
 ## Muzyka
 
-Własny odtwarzacz mp3 zamiast osadzonego Spotify — nie każdy gość musi mieć konto/appkę Spotify. Plik: `public/audio/the-commodores-easy.mp3`, ładowany leniwie (dopiero po kliknięciu Play). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
+Utwór gra w tle strony bez widocznego playera (`src/components/BackgroundAudio.tsx`). Plik: `public/audio/the-commodores-easy.mp3`.
+
+Przeglądarki blokują autoplay dźwięku, dopóki użytkownik nie wejdzie w interakcję ze stroną — logika próbuje puścić muzykę od razu, a jeśli to zablokowane, startuje przy pierwszym dotknięciu/scrollu/kliknięciu. Jedyny widoczny element to mały przycisk wyciszenia w prawym dolnym rogu (bez niego gość nie miałby jak zatrzymać dźwięku). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
 
 ## Zdjęcie podglądu linku (Open Graph)
 
