@@ -78,7 +78,7 @@ Kolejność sekcji w `App.tsx`:
 6. **`PhotoTiles`** — cztery zdjęcia w siatce 2×2, bez podpisów, z delikatnym wjazdem.
 7. **`RsvpSection`** + **`Footer`** — na końcu.
 
-Efekt „wjeżdżania" (`useReveal`) jest współdzielony przez kilka komponentów: element startuje przesunięty w dół i przezroczysty, a gdy wejdzie w viewport (raz, przez `IntersectionObserver`), płynnie ląduje na miejscu. Lekkie i tanie na telefonie — bez ciągłego parallaxu powiązanego ze scrollem.
+Efekt „wjeżdżania" (`src/lib/useScrollReveal.ts`) jest kinowy — GSAP + ScrollTrigger ze `scrub`, więc animacja (blur → ostrość, skala, przesunięcie, przezroczystość) jest CIĄGLE powiązana z pozycją scrolla, nie jednorazowo odpalana przy wejściu w viewport. Cofnięcie scrolla cofa też animację, dokładnie jak w referencyjnym `cinematic-landing-hero`. Hero (`IntroPoster`) ma odwrotny wariant tego samego mechanizmu — treść gaśnie (blur/skala/przesunięcie w górę) w miarę przewijania w dół, bez pinowania sekcji.
 
 ## Zdjęcie podglądu linku (Open Graph)
 
