@@ -37,9 +37,13 @@ export const kids = {
 }
 
 export const music = {
-  trackUrl: "https://open.spotify.com/track/1JQ6Xm1JrvHfvAqhl5pwaA",
-  embedSrc: "https://open.spotify.com/embed/track/1JQ6Xm1JrvHfvAqhl5pwaA?utm_source=generator&theme=0",
+  title: "Easy",
+  artist: "The Commodores",
+  year: "1977",
+  src: "/audio/the-commodores-easy.mp3",
 }
 
-// Podmień na własny endpoint (np. Google Apps Script webhook) przed wdrożeniem.
-export const rsvpEndpoint = ""
+// Webhook Google Apps Script podpięty pod arkusz z odpowiedziami RSVP.
+// Zobacz README.md → sekcja "RSVP" po instrukcję wdrożenia.
+export const rsvpEndpoint =
+  "https://script.google.com/macros/s/AKfycbxPLACEHOLDER/exec"

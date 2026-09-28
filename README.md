@@ -28,14 +28,26 @@ npm run preview # podgląd builda lokalnie
 Wszystkie twarde dane (data, godzina, adresy, linki) są w jednym miejscu:
 `src/config/site.ts`
 
-## RSVP — zapisywanie odpowiedzi
+## RSVP — zapisywanie odpowiedzi w Google Sheets
 
-Formularz obecnie nie wysyła danych nigdzie (`rsvpEndpoint` w `site.ts` jest pusty) — pokazuje tylko stan sukcesu.
-Żeby faktycznie zbierać odpowiedzi:
+Arkusz: https://docs.google.com/spreadsheets/d/1ljd06eiPPp0FgPYk8ttuylleC5uidW0j7fcHzF-Hucw/edit
 
-1. Najprościej: **Google Sheets + Google Apps Script** jako webhook przyjmujący POST z JSON-em.
-2. Wklej URL webhooka do `rsvpEndpoint` w `src/config/site.ts`.
-3. Alternatywy: Formspree, Supabase, Airtable + Zapier.
+Kod webhooka jest gotowy w [`google-apps-script/rsvp-webhook.gs`](google-apps-script/rsvp-webhook.gs). Trzeba go tylko wdrożyć — to jednorazowa czynność w interfejsie Google (Claude nie ma dostępu do Twojego konta Google, więc ten krok robisz Ty):
+
+1. Otwórz arkusz → **Rozszerzenia → Apps Script**.
+2. Usuń domyślną zawartość `Code.gs` i wklej w to miejsce całą treść pliku `google-apps-script/rsvp-webhook.gs` z tego repo.
+3. Zapisz (ikona dyskietki albo ⌘S).
+4. **Wdróż → Nowe wdrożenie**:
+   - Typ: **Aplikacja internetowa** (Web app)
+   - Wykonaj jako: **Ja**
+   - Kto ma dostęp: **Każdy** (Anyone) — inaczej strona zaproszenia nie będzie mogła wysłać danych
+5. Kliknij **Wdróż**, zaakceptuj uprawnienia (to Twój własny skrypt, więc Google poprosi o potwierdzenie).
+6. Skopiuj URL kończący się na `/exec`.
+7. Wklej go jako wartość `rsvpEndpoint` w `src/config/site.ts` (zastępując obecny placeholder), zapisz, zrób nowy build/deploy.
+
+Każda odpowiedź RSVP wyląduje jako nowy wiersz w zakładce „RSVP” tego arkusza (data, imię, obecność, liczba dorosłych/dzieci, uwagi).
+
+Jeśli kiedyś zmienisz treść skryptu w Apps Script, trzeba zrobić **Wdróż → Zarządzaj wdrożeniami → ✏️ → Nowa wersja**, żeby zmiany poszły na już opublikowany URL.
 
 ## Dodaj do kalendarza
 
@@ -43,6 +55,10 @@ Formularz obecnie nie wysyła danych nigdzie (`rsvpEndpoint` w `site.ts` jest pu
 - **Android / Google** — link do Kalendarza Google z gotowym wydarzeniem.
 
 Czas wydarzenia w `site.ts` jest zapisany w UTC (`startUTC`/`endUTC`) — w połowie października Polska jest wciąż w czasie letnim (UTC+2), więc 13:00 lokalnie = 11:00 UTC.
+
+## Muzyka
+
+Własny odtwarzacz mp3 zamiast osadzonego Spotify — nie każdy gość musi mieć konto/appkę Spotify. Plik: `public/audio/the-commodores-easy.mp3`, ładowany leniwie (dopiero po kliknięciu Play). Podmień plik i dane w `src/config/site.ts` (`music`), jeśli zmienisz utwór.
 
 ## Zdjęcie podglądu linku (Open Graph)
 

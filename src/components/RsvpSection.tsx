@@ -30,9 +30,12 @@ export function RsvpSection() {
 
     try {
       if (rsvpEndpoint) {
+        // text/plain unika CORS-preflightu, którego Google Apps Script web
+        // app nie obsługuje — treść i tak jest poprawnym JSON-em i tak jest
+        // parsowana po stronie skryptu (e.postData.contents).
         await fetch(rsvpEndpoint, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload),
         })
       }
